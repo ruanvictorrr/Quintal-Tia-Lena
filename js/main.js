@@ -75,6 +75,74 @@ $('week').replaceChildren(...dados.promos.map((p) => {
   return li;
 }));
 
+// Cardápio (editável no painel): destaques primeiro, lista completa no "Ver todos"
+function el(tag, attrs = {}, ...filhos) {
+  const n = document.createElement(tag);
+  Object.entries(attrs).forEach(([k, v]) => {
+    if (v == null || v === false) return;
+    if (k === 'text') n.textContent = v; else n.setAttribute(k, v);
+  });
+  filhos.flat().forEach((f) => f != null && f !== '' && n.append(f));
+  return n;
+}
+const VER_TODOS = {
+  pratos: (n) => `Ver todos os ${n} pratos`,
+  petiscos: (n) => `Ver todos os ${n} petiscos`,
+  brunch: (n) => `Ver todo o café, cuscuz e doces (${n})`,
+  drinks: (n) => `Ver todas as ${n} bebidas`
+};
+const chave = (leg) => (leg ? leg.join('|') : '');
+
+function precos(item, legenda, rotular) {
+  const dois = item.precos.length === 2;
+  return el('span', { class: dois ? 'p2' : 'p1' }, ...item.precos.map((v, i) =>
+    el('b', {}, fmtValor(v), dois && rotular && legenda ? el('small', { text: legenda[i] }) : null)));
+}
+function linha(item, nivel, secao, comSecao) {
+  return el('li', { class: item.on ? null : 'is-off' },
+    el('div', {},
+      comSecao ? el('span', { class: 'it-sec', text: secao.titulo }) : null,
+      el(nivel, {}, item.nome,
+        item.tag ? el('span', { class: 'tag', text: item.tag }) : null,
+        item.on ? null : el('span', { class: 'tag tag-off', text: 'em falta' })),
+      item.desc ? el('p', { text: item.desc }) : null),
+    precos(item, secao.legenda, comSecao));
+}
+
+function desenharCardapio() {
+  dados.cardapio.forEach((cat) => {
+    const painel = $('tab-' + cat.id);
+    if (!painel) return;
+    const todos = cat.secoes.flatMap((s) => s.itens.map((i) => ({ i, s })));
+    let dest = todos.filter((x) => x.i.destaque);
+    if (!dest.length) dest = todos.slice(0, 6);
+
+    // Legenda única no topo quando todos os destaques de 2 preços usam a mesma
+    const legs = [...new Set(dest.filter((x) => x.i.precos.length === 2).map((x) => chave(x.s.legenda)))];
+    const topo = legs.length === 1 && legs[0] ? legs[0].split('|') : null;
+    const filhos = [];
+    if (topo) filhos.push(el('p', { class: 'legend' }, ...topo.map((t) => el('span', { text: t }))));
+    filhos.push(el('ul', { class: 'items' }, ...dest.map((x) => linha(x.i, 'h3', topo ? { ...x.s, legenda: null } : x.s, true))));
+
+    const corpo = el('div', { class: 'more-body' }, ...cat.secoes.filter((s) => s.itens.length).map((s) => [
+      el('div', { class: 'sub-head' }, el('h3', { text: s.titulo }),
+        s.legenda ? el('p', { class: 'legend' }, ...s.legenda.map((t) => el('span', { text: t }))) : null),
+      s.nota ? el('p', { class: 'sub-note', text: s.nota }) : null,
+      el('ul', { class: 'items' }, ...s.itens.map((i) => linha(i, 'h4', s, false)))
+    ]));
+    const det = el('details', { class: 'more' },
+      el('summary', {}, el('span', { class: 'more-closed', text: VER_TODOS[cat.id](todos.length) }), el('span', { class: 'more-open', text: 'Voltar aos destaques' })),
+      corpo);
+    // Ao fechar uma lista longa, volta para o topo do cardápio
+    det.addEventListener('toggle', () => {
+      if (!det.open && painel.getBoundingClientRect().top < 0) $('cardapio').scrollIntoView({ block: 'start' });
+    });
+    filhos.push(det);
+    painel.replaceChildren(...filhos);
+  });
+}
+desenharCardapio();
+
 // Abas do cardápio
 const tabs = [...document.querySelectorAll('.tab')];
 const photo = $('menuPhoto');

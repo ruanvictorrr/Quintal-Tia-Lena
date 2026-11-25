@@ -72,7 +72,7 @@ $('sair').addEventListener('click', () => {
 });
 
 // ---------- Navegação ----------
-const VIEWS = ['hoje', 'buffet', 'eventos', 'promos'];
+const VIEWS = ['hoje', 'buffet', 'cardapio', 'eventos', 'promos'];
 function irPara(v) {
   VIEWS.forEach((n) => { $('v-' + n).hidden = n !== v; });
   document.querySelectorAll('.tabbar button').forEach((b) => {
@@ -184,6 +184,128 @@ $('copiar').addEventListener('click', async () => {
   catch { avisar('Não deu para copiar neste navegador'); }
 });
 
+// ---------- CARDÁPIO ----------
+let catAtual = 'pratos';
+let editando = null; // { s: índice da seção, i: índice do item ou null para novo }
+
+const catDe = (d) => d.cardapio.find((c) => c.id === catAtual);
+const rotulosPreco = (s) => s.legenda || ['Preço'];
+
+function mexerItem(si, ii, fn, msg) {
+  const d = Store.update((x) => { fn(x.cardapio.find((c) => c.id === catAtual).secoes[si].itens[ii]); });
+  desenharCardapio(d);
+  if (msg) avisar(msg);
+}
+
+function campoPreco(item, si, ii, k, rotulo) {
+  const id = `pr-${item.id}-${k}`;
+  return el('label', { class: 'mi-preco', for: id },
+    el('small', { text: rotulo }),
+    el('span', { class: 'mi-rs' }, 'R$',
+      el('input', { id, type: 'text', inputmode: 'decimal', value: fmtValor(item.precos[k]), 'aria-label': `${rotulo} de ${item.nome}`,
+        onfocus: (e) => e.target.select(),
+        onkeydown: (e) => { if (e.key === 'Enter') e.target.blur(); },
+        onchange: (e) => {
+          const v = lerValor(e.target.value);
+          if (Number.isNaN(v)) { e.target.value = fmtValor(item.precos[k]); return avisar('Preço inválido. Use algo como 24,90'); }
+          mexerItem(si, ii, (it) => { it.precos[k] = v; }, v == null ? `${item.nome}: sem preço nesse tamanho` : `${item.nome} agora R$ ${fmtValor(v)}`);
+        } })));
+}
+
+function linhaItem(item, s, si, ii) {
+  const sw = 'on-' + item.id;
+  return el('li', { class: 'mi' + (item.on ? '' : ' is-off') },
+    el('div', { class: 'mi-top' },
+      el('div', { class: 'mi-nome' },
+        el('b', {}, item.nome, item.tag ? el('span', { class: 'mi-tag', text: item.tag }) : null),
+        item.desc ? el('small', { text: item.desc }) : null),
+      el('button', { type: 'button', id: 'st-' + item.id, class: 'star', 'aria-pressed': String(item.destaque),
+        'aria-label': `${item.destaque ? 'Tirar dos' : 'Colocar nos'} destaques: ${item.nome}`, text: item.destaque ? '★' : '☆',
+        onclick: () => mexerItem(si, ii, (it) => { it.destaque = !it.destaque; }, item.destaque ? `${item.nome} saiu dos destaques` : `${item.nome} nos destaques do site`) }),
+      el('button', { type: 'button', id: 'ed-' + item.id, class: 'edit', 'aria-label': `Editar ${item.nome}`, text: '✎', onclick: () => abrirItem(si, ii) })),
+    el('div', { class: 'mi-bottom' },
+      el('label', { class: 'mi-on', for: sw },
+        el('input', { id: sw, type: 'checkbox', class: 'switch', ...(item.on ? { checked: '' } : {}),
+          onchange: (e) => mexerItem(si, ii, (it) => { it.on = e.target.checked; }, e.target.checked ? `${item.nome} voltou ao cardápio` : `${item.nome} marcado como em falta`) }),
+        el('span', { text: item.on ? 'Tem hoje' : 'Em falta' })),
+      el('div', { class: 'mi-precos' }, ...item.precos.map((_, k) => campoPreco(item, si, ii, k, rotulosPreco(s)[k])))));
+}
+
+function desenharCardapio(d) {
+  const foco = document.activeElement && document.activeElement.id;
+  const todos = (c) => c.secoes.reduce((a, s) => a + s.itens.length, 0);
+  document.querySelectorAll('#catFiltros button').forEach((b) => {
+    b.setAttribute('aria-selected', String(b.dataset.cat === catAtual));
+    b.querySelector('span').textContent = todos(d.cardapio.find((c) => c.id === b.dataset.cat));
+  });
+  const cat = catDe(d);
+  const itens = cat.secoes.flatMap((s) => s.itens);
+  const nDest = itens.filter((i) => i.destaque).length;
+  const nOff = itens.filter((i) => !i.on).length;
+  $('catResumo').replaceChildren(
+    el('span', { class: nDest > 8 ? 'warn' : null, text: `★ ${nDest} em destaque${nDest > 8 ? ' (o ideal é até 8)' : nDest === 0 ? ' (o site mostra os 6 primeiros)' : ''}` }),
+    el('span', { text: nOff ? `${nOff} em falta` : 'nada em falta' }));
+  $('catSecoes').replaceChildren(...cat.secoes.map((s, si) => el('article', { class: 'card cat-sec' },
+    el('div', { class: 'card-row' }, el('h2', {}, s.titulo, el('span', { class: 'pill', text: s.itens.length })),
+      el('button', { type: 'button', class: 'link-btn', text: '+ Item', 'aria-label': `Adicionar item em ${s.titulo}`, onclick: () => abrirItem(si, null) })),
+    s.nota ? el('p', { class: 'card-sub', text: s.nota }) : null,
+    s.itens.length ? el('ul', { class: 'mi-list' }, ...s.itens.map((it, ii) => linhaItem(it, s, si, ii)))
+      : el('p', { class: 'empty', text: 'Nenhum item nesta seção.' }))));
+  if (foco && $(foco)) $(foco).focus();
+}
+document.querySelectorAll('#catFiltros button').forEach((b) => b.addEventListener('click', () => { catAtual = b.dataset.cat; desenharCardapio(Store.get()); }));
+
+const itemSheet = $('itemSheet');
+const itemForm = $('itemForm');
+function abrirItem(si, ii) {
+  const s = catDe(Store.get()).secoes[si];
+  const it = ii == null ? null : s.itens[ii];
+  editando = { si, ii };
+  itemForm.reset();
+  $('itemErro').hidden = true;
+  $('itemTitulo').textContent = it ? 'Editar item' : 'Novo item';
+  $('itemSecao').textContent = `Seção: ${s.titulo}`;
+  $('itemExcluir').hidden = !it;
+  itemForm.nome.value = it ? it.nome : '';
+  itemForm.desc.value = it ? it.desc : '';
+  itemForm.tag.value = it ? it.tag : '';
+  itemForm.destaque.checked = !!(it && it.destaque);
+  $('itemPrecos').replaceChildren(...rotulosPreco(s).map((r, k) => el('label', { class: 'field' }, `${r} (R$)`,
+    el('input', { name: 'p' + k, type: 'text', inputmode: 'decimal', placeholder: s.legenda ? 'vazio = não tem' : '0,00', value: it ? (it.precos[k] == null ? '' : fmtValor(it.precos[k])) : '' }))));
+  itemSheet.showModal();
+  itemForm.nome.focus();
+}
+itemSheet.addEventListener('click', (e) => { if (e.target === itemSheet || e.target.closest('[data-fechar]')) itemSheet.close(); });
+itemForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const { si, ii } = editando;
+  const s = catDe(Store.get()).secoes[si];
+  const nome = itemForm.nome.value.trim();
+  const precos = rotulosPreco(s).map((_, k) => lerValor(itemForm['p' + k].value));
+  const erro = nome.length < 2 ? 'Escreva o nome do item.'
+    : precos.some(Number.isNaN) ? 'Algum preço está estranho. Use algo como 24,90.'
+    : precos.every((p) => p == null) ? 'Coloque pelo menos um preço.' : '';
+  if (erro) { $('itemErro').textContent = erro; $('itemErro').hidden = false; return; }
+  const dadosItem = { nome, desc: itemForm.desc.value.trim(), tag: itemForm.tag.value.trim(), precos, destaque: itemForm.destaque.checked };
+  const d = Store.update((x) => {
+    const sec = x.cardapio.find((c) => c.id === catAtual).secoes[si];
+    if (ii == null) sec.itens.push({ id: 'n' + Date.now(), on: true, ...dadosItem });
+    else Object.assign(sec.itens[ii], dadosItem);
+  });
+  itemSheet.close();
+  desenharCardapio(d);
+  avisar(ii == null ? `${nome} adicionado ao cardápio` : `${nome} atualizado`);
+});
+$('itemExcluir').addEventListener('click', () => {
+  const { si, ii } = editando;
+  const it = catDe(Store.get()).secoes[si].itens[ii];
+  if (!confirm(`Excluir "${it.nome}" do cardápio?`)) return;
+  const d = Store.update((x) => { x.cardapio.find((c) => c.id === catAtual).secoes[si].itens.splice(ii, 1); });
+  itemSheet.close();
+  desenharCardapio(d);
+  avisar(`${it.nome} excluído do cardápio`);
+});
+
 // ---------- EVENTOS ----------
 const ROTULO = { novo: 'Novo', orcado: 'Orçado', fechado: 'Fechado', perdido: 'Não fechou' };
 
@@ -278,6 +400,7 @@ function desenharTudo(d = Store.get()) {
   desenharHoje(d);
   desenharBuffet(d);
   desenharEventos(d);
+  if (!$('catSecoes').contains(document.activeElement) && !itemSheet.open) desenharCardapio(d);
   if (!$('promoForm').contains(document.activeElement)) desenharPromos(d);
 }
 
