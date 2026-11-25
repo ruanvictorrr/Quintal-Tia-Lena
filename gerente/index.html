@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Área do gerente | Quintal de Tia Lena</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1f3322">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232f4a32'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='30' font-style='italic' fill='%23f2c14e' text-anchor='middle'%3ETL%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500;1,9..144,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css?v=4">
+<link rel="stylesheet" href="css/painel.css?v=4">
+<script src="../js/store.js?v=4" defer></script>
+<script src="js/painel.js?v=4" defer></script>
+</head>
+<body class="painel">
+
+<!-- Entrada com PIN -->
+<main class="login" id="login">
+  <form class="login-card" id="loginForm" novalidate>
+    <span class="logo-mark" aria-hidden="true">TL</span>
+    <p class="login-brand">Quintal de Tia Lena</p>
+    <h1>Área do gerente</h1>
+    <label class="field">PIN de acesso
+      <input id="pin" type="password" inputmode="numeric" autocomplete="current-password" maxlength="8" required>
+    </label>
+    <p class="help">Demonstração: o PIN é <b>2026</b>.</p>
+    <p class="error" id="pinErro" role="alert" hidden></p>
+    <button class="btn btn-green" type="submit">Entrar</button>
+    <a class="back" href="../">Voltar ao site</a>
+  </form>
+</main>
+
+<!-- Painel -->
+<div class="app" id="app" hidden>
+  <header class="app-top">
+    <p class="app-brand">Quintal de <em>Tia Lena</em></p>
+    <div class="app-actions">
+      <a class="mini-btn" href="../" target="_blank" rel="noopener">Ver site</a>
+      <button class="mini-btn" type="button" id="sair">Sair</button>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <!-- HOJE -->
+    <section class="view" id="v-hoje" aria-labelledby="h-hoje">
+      <header class="view-head">
+        <h1 id="h-hoje"><span id="saudacao">Bom dia</span>, Tia Lena!</h1>
+        <p class="view-sub" id="dataHoje"></p>
+      </header>
+
+      <div class="stats">
+        <button class="stat" type="button" data-go="hoje" id="statStatus"><span class="stat-dot"></span><b id="sStatus">—</b><span id="sStatusSub">situação no site</span></button>
+        <button class="stat" type="button" data-go="buffet"><b id="sPratos">0</b><span>pratos no buffet hoje</span></button>
+        <button class="stat" type="button" data-go="eventos"><b id="sNovos">0</b><span>pedidos de evento novos</span></button>
+        <button class="stat" type="button" data-go="buffet"><b>R$ <span id="sPreco">25</span></b><span>prato livre</span></button>
+      </div>
+
+      <article class="card">
+        <h2>Funcionamento hoje</h2>
+        <p class="card-sub">Fechou por algum motivo? Avise aqui e o site já mostra "Fechado hoje".</p>
+        <div class="seg" role="radiogroup" aria-label="Funcionamento hoje">
+          <button type="button" role="radio" data-status="auto" aria-checked="true">Seguir horário</button>
+          <button type="button" role="radio" data-status="fechado" aria-checked="false">Fechado hoje</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Aviso no topo do site</h2>
+        <p class="card-sub">Ex.: "Hoje tem feijoada no buffet!" ou "Amanhã abrimos só no almoço".</p>
+        <textarea id="aviso" rows="3" maxlength="140" placeholder="Escreva um aviso curto…"></textarea>
+        <div class="row-end">
+          <span class="count" id="avisoCount">0/140</span>
+          <button class="btn-s ghost" type="button" id="avisoLimpar">Tirar aviso</button>
+          <button class="btn-s solid" type="button" id="avisoSalvar">Publicar</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-row">
+          <h2>Últimos pedidos de evento</h2>
+          <button class="link-btn" type="button" data-go="eventos">Ver todos →</button>
+        </div>
+        <ol class="ev-list compact" id="evResumo"></ol>
+      </article>
+    </section>
+
+    <!-- BUFFET -->
+    <section class="view" id="v-buffet" aria-labelledby="h-buffet" hidden>
+      <header class="view-head">
+        <h1 id="h-buffet">Buffet do dia</h1>
+        <p class="view-sub">Marque o que está no self-service hoje. A lista aparece no site na hora.</p>
+      </header>
+
+      <article class="card price-edit">
+        <h2>Preço do prato livre</h2>
+        <div class="stepper">
+          <button type="button" id="precoMenos" aria-label="Diminuir R$ 1">−</button>
+          <label class="stepper-val">R$ <input id="preco" type="number" min="1" step="0.5" inputmode="decimal" aria-label="Preço em reais"></label>
+          <button type="button" id="precoMais" aria-label="Aumentar R$ 1">+</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-row">
+          <h2>Pratos <span class="pill" id="buffetCount">0</span></h2>
+          <button class="link-btn" type="button" id="copiar">Copiar p/ WhatsApp</button>
+        </div>
+        <ul class="dishes" id="dishes"></ul>
+        <form class="add" id="addForm">
+          <input id="addNome" type="text" placeholder="Adicionar prato (ex.: Galinha de capoeira)" maxlength="40" autocomplete="off" aria-label="Nome do prato">
+          <button class="btn-s solid" type="submit">Adicionar</button>
+        </form>
+      </article>
+    </section>
+
+    <!-- EVENTOS -->
+    <section class="view" id="v-eventos" aria-labelledby="h-eventos" hidden>
+      <header class="view-head view-head-row">
+        <div>
+          <h1 id="h-eventos">Eventos</h1>
+          <p class="view-sub">Pedidos de orçamento do site e os que chegaram por telefone.</p>
+        </div>
+        <button class="btn-s solid" type="button" id="novoEvento">+ Novo pedido</button>
+      </header>
+
+      <div class="filters" role="tablist" aria-label="Filtrar pedidos" id="filtros">
+        <button type="button" role="tab" aria-selected="true" data-f="todos">Todos <span></span></button>
+        <button type="button" role="tab" aria-selected="false" data-f="novo">Novos <span></span></button>
+        <button type="button" role="tab" aria-selected="false" data-f="orcado">Orçados <span></span></button>
+        <button type="button" role="tab" aria-selected="false" data-f="fechado">Fechados <span></span></button>
+      </div>
+      <p class="empty" id="evVazio" hidden>Nenhum pedido aqui.</p>
+      <ol class="ev-list" id="evLista"></ol>
+    </section>
+
+    <!-- PROMOÇÕES -->
+    <section class="view" id="v-promos" aria-labelledby="h-promos" hidden>
+      <header class="view-head">
+        <h1 id="h-promos">Promoções da semana</h1>
+        <p class="view-sub">Mude o texto de cada dia. O site destaca automaticamente a promoção de hoje.</p>
+      </header>
+      <form id="promoForm" class="promo-form"></form>
+    </section>
+
+    <p class="reset"><button class="link-btn" type="button" id="resetar">Restaurar dados de exemplo</button></p>
+  </main>
+
+  <nav class="tabbar" aria-label="Seções do painel">
+    <button type="button" data-view="hoje" aria-current="page">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Hoje</button>
+    <button type="button" data-view="buffet">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 14h18M5 14a7 7 0 0 1 14 0M12 5v2M2 18h20"/></svg>Buffet</button>
+    <button type="button" data-view="eventos">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v14H4zM4 10h16M8 3v4M16 3v4"/></svg>Eventos<span class="badge" id="tabBadge" hidden></span></button>
+    <button type="button" data-view="promos">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8zM7.5 7.5h.01"/></svg>Promoções</button>
+  </nav>
+</div>
+
+<!-- Novo pedido de evento -->
+<dialog class="sheet" id="sheet">
+  <form id="evForm" class="sheet-form" novalidate>
+    <header class="sheet-head">
+      <h2>Novo pedido de evento</h2>
+      <button class="x" type="button" data-fechar aria-label="Fechar">×</button>
+    </header>
+    <p class="card-sub">Para pedidos que chegaram por telefone ou no balcão.</p>
+    <label class="field">Nome<input name="nome" type="text" required autocomplete="off"></label>
+    <label class="field">Tipo
+      <select name="tipo">
+        <option>Aniversário</option><option>Confraternização</option><option>Chá de bebê / revelação</option><option>Encontro de família</option><option>Outro</option>
+      </select>
+    </label>
+    <div class="row2">
+      <label class="field">Data<input name="data" type="date" required></label>
+      <label class="field">Convidados<input name="pessoas" type="number" min="1" inputmode="numeric" required></label>
+    </div>
+    <p class="error" id="evErro" role="alert" hidden></p>
+    <button class="btn btn-green" type="submit">Salvar pedido</button>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+</body>
+</html>
