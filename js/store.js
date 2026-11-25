@@ -23,8 +23,8 @@ const STORE_DEFAULTS = {
     { nome: 'Cocada', on: true }
   ],
   promos: [
-    { dia: 2, rotulo: 'Terça', titulo: 'Terça do Clone', texto: 'Caipirinha, batata, caldinhos e mini pastéis em dobro.' },
-    { dia: 3, rotulo: 'Quarta', titulo: 'Quarta dos Combos', texto: 'Pizza G muçarela ou calabresa + refri 1 L por R$ 42. Happy hour das 17h às 20h.' },
+    { dia: 2, rotulo: 'Terça', titulo: 'Terça do Clone', texto: 'Promoção do clone em caipirinha, batata simples, caldinhos e mini pastéis.' },
+    { dia: 3, rotulo: 'Quarta', titulo: 'Quarta dos Combos', texto: 'Pizza G + refri 1 L por R$ 42, 4 pastéis de carne + refri por R$ 25 ou batata gourmet + 2 Spaten por R$ 30.' },
     { dia: 4, rotulo: 'Quinta', titulo: 'Quinta da Long Neck', texto: 'Balde com 5 long necks por R$ 25.' },
     { dia: 5, rotulo: 'Sexta', titulo: 'A Sexta tá Massa!', texto: 'Lasanha individual a partir de R$ 17,99. Happy hour das 17h às 20h.' },
     { dia: '6,0', rotulo: 'Sáb e dom', titulo: 'Feijoada com caipirinha', texto: 'Na feijoada individual, a primeira caipirinha é por conta da casa.' }

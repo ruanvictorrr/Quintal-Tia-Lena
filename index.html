@@ -10,9 +10,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500;1,9..144,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=4">
-<script src="js/store.js?v=4" defer></script>
-<script src="js/main.js?v=4" defer></script>
+<link rel="stylesheet" href="css/styles.css?v=6">
+<script src="js/store.js?v=6" defer></script>
+<script src="js/main.js?v=6" defer></script>
 </head>
 <body>
 
@@ -110,14 +110,14 @@
       <header class="sec-head">
         <p class="eyebrow">À la carte</p>
         <h2>Do caldinho à <em>picanha na tábua.</em></h2>
-        <p class="muted">Alguns destaques do cardápio. Pratos principais servem 1 ou 2 pessoas.</p>
+        <p class="muted">Os destaques de cada categoria, com o cardápio completo logo abaixo. Pratos principais servem 1 ou 2 pessoas.</p>
       </header>
 
       <div class="tabs" role="tablist" aria-label="Categorias do cardápio">
         <button role="tab" aria-selected="true" aria-controls="tab-pratos" id="t-pratos" class="tab">Pratos</button>
         <button role="tab" aria-selected="false" aria-controls="tab-petiscos" id="t-petiscos" class="tab" tabindex="-1">Petiscos</button>
         <button role="tab" aria-selected="false" aria-controls="tab-brunch" id="t-brunch" class="tab" tabindex="-1">Café &amp; cuscuz</button>
-        <button role="tab" aria-selected="false" aria-controls="tab-drinks" id="t-drinks" class="tab" tabindex="-1">Drinks</button>
+        <button role="tab" aria-selected="false" aria-controls="tab-drinks" id="t-drinks" class="tab" tabindex="-1">Bebidas</button>
       </div>
 
       <div class="menu-wrap">
@@ -135,6 +135,42 @@
             <li><div><h3>Parmegiana de frango</h3><p>Muçarela, macarrão ao sugo e purê</p></div><span class="p2"><b>26,99</b><b>47,99</b></span></li>
             <li><div><h3>Mistão</h3><p>Carne, carne de sol, toscana, frango e queijo coalho</p></div><span class="p2"><b>—</b><b>61,99</b></span></li>
           </ul>
+          <details class="more">
+            <summary><span class="more-closed">Ver todos os 19 pratos</span><span class="more-open">Voltar aos destaques</span></summary>
+            <div class="more-body">
+              <div class="sub-head"><h3>Frango</h3><p class="legend"><span>1 pessoa</span><span>2 pessoas</span></p></div>
+              <ul class="items">
+                <li><div><h4>Panqueca de frango</h4><p>Arroz, batata frita, farofa e vinagrete</p></div><span class="p2"><b>19,99</b><b>32,99</b></span></li>
+                <li><div><h4>Filé de frango grelhado</h4><p>Feijão, arroz, purê, farofa e vinagrete</p></div><span class="p2"><b>26,99</b><b>44,99</b></span></li>
+                <li><div><h4>Parmegiana de frango</h4><p>Muçarela, macarrão ao molho de tomate e purê</p></div><span class="p2"><b>26,99</b><b>47,99</b></span></li>
+              </ul>
+              <div class="sub-head"><h3>Carnes</h3><p class="legend"><span>1 pessoa</span><span>2 pessoas</span></p></div>
+              <ul class="items">
+                <li><div><h4>Panqueca de carne</h4><p>Arroz, batata frita, farofa e vinagrete</p></div><span class="p2"><b>19,99</b><b>34,99</b></span></li>
+                <li><div><h4>Bisteca suína ao molho de laranja</h4><p>Feijão, arroz, purê, farofa e vinagrete</p></div><span class="p2"><b>24,99</b><b>42,99</b></span></li>
+                <li><div><h4>Bife acebolado</h4><p>Feijão, arroz, purê ou fritas, farofa e vinagrete</p></div><span class="p2"><b>26,99</b><b>46,99</b></span></li>
+                <li><div><h4>Feijoada <span class="tag">sáb e dom</span></h4><p>Arroz, farofa, vinagrete e couve</p></div><span class="p2"><b>27,99</b><b>50,99</b></span></li>
+                <li><div><h4>Parmegiana de carne</h4><p>Muçarela, macarrão ao molho de tomate e purê</p></div><span class="p2"><b>31,99</b><b>58,99</b></span></li>
+                <li><div><h4>Costela bovina no bafo</h4><p>Feijão, arroz, purê ou fritas, farofa e vinagrete</p></div><span class="p2"><b>31,99</b><b>58,99</b></span></li>
+                <li><div><h4>Maminha</h4><p>Fatiada, com feijão, arroz, purê ou fritas, farofa e vinagrete</p></div><span class="p2"><b>34,99</b><b>64,99</b></span></li>
+                <li><div><h4>Carne de sol</h4><p>Feijão, arroz, purê ou fritas, farofa e vinagrete</p></div><span class="p2"><b>34,99</b><b>63,99</b></span></li>
+                <li><div><h4>Picanha</h4><p>Fatiada, com feijão, arroz, purê ou fritas, farofa e vinagrete</p></div><span class="p2"><b>37,99</b><b>67,99</b></span></li>
+                <li><div><h4>Mistão</h4><p>Carne, carne de sol, toscana, frango e queijo coalho, com feijão, arroz, purê ou fritas, farofa e vinagrete</p></div><span class="p2"><b>—</b><b>61,99</b></span></li>
+              </ul>
+              <div class="sub-head"><h3>Massas</h3><p class="legend"><span>1 pessoa</span><span>2 pessoas</span></p></div>
+              <ul class="items">
+                <li><div><h4>Espaguete à carbonara</h4><p>Molho especial com pedaços de bacon</p></div><span class="p2"><b>24,99</b><b>41,99</b></span></li>
+                <li><div><h4>Espaguete à bolonhesa</h4><p>Molho de tomate com carne moída</p></div><span class="p2"><b>24,99</b><b>37,99</b></span></li>
+                <li><div><h4>Lasanha de frango</h4><p>Frango desfiado, muçarela, presunto e molho branco</p></div><span class="p2"><b>21,99</b><b>—</b></span></li>
+                <li><div><h4>Lasanha de carne</h4><p>Carne moída, muçarela, presunto e molho de tomate</p></div><span class="p2"><b>21,99</b><b>—</b></span></li>
+              </ul>
+              <div class="sub-head"><h3>Porções extras</h3></div>
+              <ul class="items">
+                <li><div><h4>Farofa ou vinagrete</h4></div><span class="p1"><b>2,00</b></span></li>
+                <li><div><h4>Feijão, arroz, macarrão ou purê</h4></div><span class="p1"><b>6,00</b></span></li>
+              </ul>
+            </div>
+          </details>
         </div>
 
         <div class="panel" role="tabpanel" id="tab-petiscos" aria-labelledby="t-petiscos" data-img="img/petiscos.jpg" data-alt="Tábua de espetinhos com vinagrete, farofa e molho ao lado de macaxeira frita com creme e bacon" hidden>
@@ -146,6 +182,69 @@
             <li><div><h3>Espetinho de coalho</h3><p>Com ervas e mel de engenho</p></div><span class="p1"><b>8,99</b></span></li>
             <li><div><h3>Brusqueta tradicional</h3><p>Molho de tomate especial e muçarela</p></div><span class="p1"><b>16,00</b></span></li>
           </ul>
+          <details class="more">
+            <summary><span class="more-closed">Ver todos os 32 petiscos</span><span class="more-open">Voltar aos destaques</span></summary>
+            <div class="more-body">
+              <div class="sub-head"><h3>Saladas</h3></div>
+              <p class="sub-note">Molhos: rosé, mostarda e mel ou iogurte.</p>
+              <ul class="items">
+                <li><div><h4>À moda da casa</h4><p>Alface, tomate, cebola, repolho, cenoura e molho</p></div><span class="p1"><b>19,99</b></span></li>
+                <li><div><h4>Caesar</h4><p>Mix de folhas, rúcula, tomate seco, tiras de frango e molho</p></div><span class="p1"><b>21,99</b></span></li>
+                <li><div><h4>Tia Lena</h4><p>Mix de folhas, tomate cereja, cebola roxa, cenoura, queijo coalho e molho</p></div><span class="p1"><b>21,99</b></span></li>
+                <li><div><h4>Salpicão</h4><p>Repolho, batata, cenoura, uva passa, maçã, frango e molho</p></div><span class="p1"><b>24,99</b></span></li>
+              </ul>
+              <div class="sub-head"><h3>Pães</h3></div>
+              <ul class="items">
+                <li><div><h4>Pão de alho</h4><p>Pão assado com creme de alho</p></div><span class="p1"><b>8,00</b></span></li>
+                <li><div><h4>Brusqueta tradicional</h4><p>Molho de tomate especial e muçarela</p></div><span class="p1"><b>16,00</b></span></li>
+                <li><div><h4>Brusqueta ao pesto</h4><p>Molho pesto e muçarela</p></div><span class="p1"><b>19,99</b></span></li>
+                <li><div><h4>Tiras de filé mignon no pão italiano</h4><p>Filé mignon ao blend de queijos</p></div><span class="p1"><b>51,99</b></span></li>
+              </ul>
+              <div class="sub-head"><h3>Caldinhos</h3></div>
+              <ul class="items">
+                <li><div><h4>Feijão preto ou mulatinho</h4><p>Com azeitona, ovo de codorna e calabresa</p></div><span class="p1"><b>8,99</b></span></li>
+                <li><div><h4>Camarão</h4><p>Com azeitona, ovo de codorna e calabresa</p></div><span class="p1"><b>11,99</b></span></li>
+              </ul>
+              <div class="sub-head"><h3>Camarão</h3></div>
+              <ul class="items">
+                <li><div><h4>Camarão ao alho e óleo</h4><p>Porção de aproximadamente 350 g</p></div><span class="p1"><b>26,99</b></span></li>
+              </ul>
+              <div class="sub-head"><h3>Espetinhos</h3></div>
+              <ul class="items">
+                <li><div><h4>Frango</h4></div><span class="p1"><b>7,99</b></span></li>
+                <li><div><h4>Queijo coalho</h4><p>Com ervas e mel de engenho</p></div><span class="p1"><b>8,99</b></span></li>
+                <li><div><h4>Carne bovina</h4></div><span class="p1"><b>9,50</b></span></li>
+                <li><div><h4>Frango com bacon</h4></div><span class="p1"><b>9,50</b></span></li>
+                <li><div><h4>Coração de galinha</h4></div><span class="p1"><b>9,99</b></span></li>
+              </ul>
+              <div class="sub-head"><h3>Fritas</h3></div>
+              <ul class="items">
+                <li><div><h4>Batata frita simples</h4><p>Porção pequena</p></div><span class="p1"><b>11,99</b></span></li>
+                <li><div><h4>Batata frita gourmet</h4><p>Porção grande com cheddar e bacon</p></div><span class="p1"><b>19,99</b></span></li>
+                <li><div><h4>Macaxeira frita simples</h4><p>Porção pequena</p></div><span class="p1"><b>11,99</b></span></li>
+                <li><div><h4>Macaxeira frita gourmet</h4><p>Porção grande ao creme de queijo e bacon</p></div><span class="p1"><b>19,99</b></span></li>
+                <li><div><h4>Calabresa com fritas</h4><p>Calabresa com batata frita</p></div><span class="p1"><b>24,99</b></span></li>
+                <li><div><h4>Maminha com fritas</h4><p>Carne bovina com batata frita</p></div><span class="p1"><b>29,99</b></span></li>
+                <li><div><h4>Carne de sol com coalho e fritas</h4><p>Queijo coalho assado e batata frita</p></div><span class="p1"><b>31,99</b></span></li>
+              </ul>
+              <div class="sub-head"><h3>Linguiça toscana</h3></div>
+              <ul class="items">
+                <li><div><h4>Linguiça mista picante</h4><p>Com geleia de pimenta</p></div><span class="p1"><b>10,99</b></span></li>
+              </ul>
+              <div class="sub-head"><h3>Mini pastéis</h3></div>
+              <p class="sub-note">Porção com 6 unidades.</p>
+              <ul class="items">
+                <li><div><h4>Frango</h4></div><span class="p1"><b>14,00</b></span></li>
+                <li><div><h4>Carne e açúcar</h4></div><span class="p1"><b>14,00</b></span></li>
+                <li><div><h4>Frango com catupiry</h4></div><span class="p1"><b>14,00</b></span></li>
+                <li><div><h4>Quatro queijos</h4></div><span class="p1"><b>14,00</b></span></li>
+                <li><div><h4>Calabresa com queijo</h4></div><span class="p1"><b>14,00</b></span></li>
+                <li><div><h4>Chocolate</h4></div><span class="p1"><b>14,00</b></span></li>
+                <li><div><h4>Queijo do reino</h4></div><span class="p1"><b>18,00</b></span></li>
+                <li><div><h4>Nutella</h4></div><span class="p1"><b>18,00</b></span></li>
+              </ul>
+            </div>
+          </details>
         </div>
 
         <div class="panel" role="tabpanel" id="tab-brunch" aria-labelledby="t-brunch" data-img="img/croissant.jpg" data-alt="Croissant recheado servido em prato de louça azul" hidden>
@@ -157,6 +256,49 @@
             <li><div><h3>Croissant tradicional</h3><p>Unidade</p></div><span class="p1"><b>7,00</b></span></li>
             <li><div><h3>Cartola</h3><p>Banana, queijo, açúcar e canela</p></div><span class="p1"><b>16,99</b></span></li>
           </ul>
+          <details class="more">
+            <summary><span class="more-closed">Ver todo o café, cuscuz e doces (21)</span><span class="more-open">Voltar aos destaques</span></summary>
+            <div class="more-body">
+              <div class="sub-head"><h3>Cuscuz recheado</h3></div>
+              <p class="sub-note">Individual.</p>
+              <ul class="items">
+                <li><div><h4>Queijo coalho e manteiga de garrafa</h4></div><span class="p1"><b>9,99</b></span></li>
+                <li><div><h4>Frango com catupiry</h4></div><span class="p1"><b>11,99</b></span></li>
+                <li><div><h4>Charque guisada</h4></div><span class="p1"><b>12,99</b></span></li>
+              </ul>
+              <div class="sub-head"><h3>Tapiocas</h3></div>
+              <ul class="items">
+                <li><div><h4>Coco</h4></div><span class="p1"><b>5,00</b></span></li>
+                <li><div><h4>Coco e queijo coalho</h4></div><span class="p1"><b>6,00</b></span></li>
+                <li><div><h4>Frango com catupiry</h4></div><span class="p1"><b>8,00</b></span></li>
+                <li><div><h4>Charque</h4></div><span class="p1"><b>8,00</b></span></li>
+              </ul>
+              <div class="sub-head"><h3>Croissant</h3></div>
+              <ul class="items">
+                <li><div><h4>Tradicional</h4></div><span class="p1"><b>7,00</b></span></li>
+                <li><div><h4>Queijo do reino</h4></div><span class="p1"><b>9,00</b></span></li>
+              </ul>
+              <div class="sub-head"><h3>Pastéis</h3></div>
+              <p class="sub-note">Preço por unidade.</p>
+              <ul class="items">
+                <li><div><h4>Frango</h4></div><span class="p1"><b>9,00</b></span></li>
+                <li><div><h4>Carne</h4></div><span class="p1"><b>9,00</b></span></li>
+                <li><div><h4>Calabresa com queijo</h4></div><span class="p1"><b>9,00</b></span></li>
+                <li><div><h4>Frango com catupiry</h4></div><span class="p1"><b>11,00</b></span></li>
+                <li><div><h4>Quatro queijos</h4></div><span class="p1"><b>11,00</b></span></li>
+                <li><div><h4>Chocolate</h4></div><span class="p1"><b>11,00</b></span></li>
+                <li><div><h4>Queijo do reino</h4></div><span class="p1"><b>12,00</b></span></li>
+                <li><div><h4>Nutella</h4></div><span class="p1"><b>12,00</b></span></li>
+              </ul>
+              <div class="sub-head"><h3>Sobremesas</h3></div>
+              <ul class="items">
+                <li><div><h4>Pudim de leite</h4></div><span class="p1"><b>10,00</b></span></li>
+                <li><div><h4>Mousse</h4><p>Morango, maracujá ou limão</p></div><span class="p1"><b>10,00</b></span></li>
+                <li><div><h4>Torta</h4><p>Fatia</p></div><span class="p1"><b>16,99</b></span></li>
+                <li><div><h4>Cartola</h4><p>Banana, queijo, açúcar e canela</p></div><span class="p1"><b>16,99</b></span></li>
+              </ul>
+            </div>
+          </details>
         </div>
 
         <div class="panel" role="tabpanel" id="tab-drinks" aria-labelledby="t-drinks" data-img="img/mural-noite.jpg" data-alt="Varanda à noite com mesas de madeira e mural em estilo xilogravura" hidden>
@@ -168,6 +310,65 @@
             <li><div><h3>Caipifruta</h3><p>Morango ou kiwi, Smirnoff e leite moça</p></div><span class="p1"><b>12,00</b></span></li>
             <li><div><h3>Tropical refrescante <span class="tag">sem álcool</span></h3><p>Morango, limão e água de coco</p></div><span class="p1"><b>15,00</b></span></li>
           </ul>
+          <details class="more">
+            <summary><span class="more-closed">Ver todas as 39 bebidas</span><span class="more-open">Voltar aos destaques</span></summary>
+            <div class="more-body">
+              <div class="sub-head"><h3>Drinks</h3></div>
+              <ul class="items">
+                <li><div><h4>Caipirinha</h4><p>Cachaça Pitú e limão</p></div><span class="p1"><b>10,00</b></span></li>
+                <li><div><h4>Caipifruta</h4><p>Morango ou kiwi, Smirnoff e leite moça</p></div><span class="p1"><b>12,00</b></span></li>
+                <li><div><h4>Caipiroska</h4><p>Smirnoff e fruta</p></div><span class="p1"><b>15,00</b></span></li>
+                <li><div><h4>Coquetel frutas vermelhas</h4><p>Smirnoff, leite moça e Fabbri</p></div><span class="p1"><b>16,00</b></span></li>
+                <li><div><h4>Mojito</h4><p>Rum, limão, gelo e soda</p></div><span class="p1"><b>17,00</b></span></li>
+                <li><div><h4>Dry Martini</h4><p>Gin e vermouth</p></div><span class="p1"><b>17,00</b></span></li>
+                <li><div><h4>Coquetel Quintal Azul</h4><p>Curaçau blue, Schweppes e limão</p></div><span class="p1"><b>18,00</b></span></li>
+                <li><div><h4>Mimosa</h4><p>Espumante moscatel e suco de laranja</p></div><span class="p1"><b>18,00</b></span></li>
+                <li><div><h4>Gin tônica</h4><p>Tanqueray e tônica Schweppes</p></div><span class="p1"><b>20,00</b></span></li>
+                <li><div><h4>Gin Tia Lena</h4><p>Tanqueray com Red Bull melancia, tropical ou açaí</p></div><span class="p1"><b>20,00</b></span></li>
+                <li><div><h4>Lena Coffee</h4><p>Café, leite condensado e vodka</p></div><span class="p1"><b>20,00</b></span></li>
+                <li><div><h4>Infinity Strawberry</h4><p>Morango, leite condensado e Smirnoff Ice</p></div><span class="p1"><b>25,00</b></span></li>
+              </ul>
+              <div class="sub-head"><h3>Sem álcool</h3></div>
+              <ul class="items">
+                <li><div><h4>Dona Honra</h4><p>Limão siciliano, água com gás e Fabbri de kiwi e limão</p></div><span class="p1"><b>13,00</b></span></li>
+                <li><div><h4>Tropical refrescante</h4><p>Morango, limão e água de coco</p></div><span class="p1"><b>15,00</b></span></li>
+                <li><div><h4>Soda italiana</h4><p>Xarope e água com gás</p></div><span class="p1"><b>15,00</b></span></li>
+              </ul>
+              <div class="sub-head"><h3>Cervejas</h3><p class="legend"><span>Long neck</span><span>600 ml</span></p></div>
+              <ul class="items">
+                <li><div><h4>Heineken</h4></div><span class="p2"><b>8,00</b><b>15,00</b></span></li>
+                <li><div><h4>Budweiser</h4></div><span class="p2"><b>6,00</b><b>12,00</b></span></li>
+                <li><div><h4>Spaten</h4></div><span class="p2"><b>6,00</b><b>—</b></span></li>
+                <li><div><h4>Heineken Zero</h4></div><span class="p2"><b>6,00</b><b>—</b></span></li>
+                <li><div><h4>Devassa</h4></div><span class="p2"><b>—</b><b>12,00</b></span></li>
+                <li><div><h4>Brahma Duplo Malte</h4></div><span class="p2"><b>—</b><b>12,00</b></span></li>
+                <li><div><h4>Petra</h4></div><span class="p2"><b>—</b><b>12,00</b></span></li>
+                <li><div><h4>Amstel</h4></div><span class="p2"><b>—</b><b>12,00</b></span></li>
+              </ul>
+              <div class="sub-head"><h3>Destilados</h3><p class="legend"><span>Dose</span><span>Litro</span></p></div>
+              <ul class="items">
+                <li><div><h4>Vodka Orloff</h4></div><span class="p2"><b>5,00</b><b>40,00</b></span></li>
+                <li><div><h4>Vodka Absolut</h4></div><span class="p2"><b>12,00</b><b>140,00</b></span></li>
+                <li><div><h4>Whisky Black &amp; White</h4></div><span class="p2"><b>8,00</b><b>—</b></span></li>
+                <li><div><h4>Whisky Red Label</h4></div><span class="p2"><b>10,00</b><b>160,00</b></span></li>
+                <li><div><h4>Whisky Old Parr</h4></div><span class="p2"><b>12,00</b><b>200,00</b></span></li>
+                <li><div><h4>Cachaça</h4><p>Dose</p></div><span class="p2"><b>4,00</b><b>—</b></span></li>
+                <li><div><h4>Rum</h4><p>Dose</p></div><span class="p2"><b>4,00</b><b>—</b></span></li>
+              </ul>
+              <div class="sub-head"><h3>Água, refri e sucos</h3></div>
+              <ul class="items">
+                <li><div><h4>Água sem gás</h4></div><span class="p1"><b>4,00</b></span></li>
+                <li><div><h4>Água com gás</h4></div><span class="p1"><b>5,00</b></span></li>
+                <li><div><h4>Suco</h4><p>Copo</p></div><span class="p1"><b>6,00</b></span></li>
+                <li><div><h4>Suco</h4><p>Jarra</p></div><span class="p1"><b>12,00</b></span></li>
+                <li><div><h4>Refrigerante</h4><p>Lata</p></div><span class="p1"><b>7,00</b></span></li>
+                <li><div><h4>Refrigerante</h4><p>1 litro</p></div><span class="p1"><b>10,00</b></span></li>
+                <li><div><h4>Schweppes Citrus</h4></div><span class="p1"><b>6,00</b></span></li>
+                <li><div><h4>Smirnoff Ice</h4></div><span class="p1"><b>8,00</b></span></li>
+                <li><div><h4>Energético</h4></div><span class="p1"><b>10,00</b></span></li>
+              </ul>
+            </div>
+          </details>
         </div>
       </div>
       <p class="fine">Preços em reais, sujeitos a alteração. Confirme pelo WhatsApp.</p>
@@ -182,6 +383,21 @@
         <h2>Todo dia tem <em>um motivo pra vir.</em></h2>
       </header>
       <ol class="week" id="week"></ol>
+
+      <div class="hh">
+        <div class="hh-head">
+          <p class="eyebrow eyebrow-sun">Happy hour</p>
+          <h3>Quarta e sexta, <em>das 17h às 20h</em></h3>
+        </div>
+        <ul class="hh-list">
+          <li><span>Caldinho de feijão</span><b>4,99</b></li>
+          <li><span>Pão de alho</span><b>4,99</b></li>
+          <li><span>Espetinho de carne, frango ou coalho</span><b>5,99</b></li>
+          <li><span>Batata frita simples</span><b>9,99</b></li>
+          <li><span>Caipirinha</span><b>9,99</b></li>
+          <li><span>Caipiroska</span><b>13,99</b></li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -191,7 +407,8 @@
       <header class="sec-head">
         <p class="eyebrow">O Quintal</p>
         <h2>Um jardim colonial <em>pra comer sem pressa.</em></h2>
-        <p class="muted">Restaurante, cafeteria, bar suspenso e jardim externo. Mural em xilogravura, música boa e aquele atendimento que faz a gente se sentir em casa. Todo mundo é bem-vindo por aqui.</p>
+        <p class="muted">O Quintal de Tia Lena chegou em Caruaru para juntar <strong>afeto, cultura e comida regional</strong> num jardim todo decorado no estilo colonial. O que a gente faz de melhor é acolher bem: comida feita com carinho, bebidas e drinks caprichados e eventos mais calmos e íntimos.</p>
+        <p class="muted">Restaurante, cafeteria, bar suspenso e jardim externo, com mural em xilogravura e música boa. Todo mundo é bem-vindo por aqui.</p>
       </header>
       <div class="gallery">
         <figure class="g-a"><img src="img/jardim.jpg" alt="Varanda com parede de folhagem, mesas com toalhas estampadas e cadeiras de madeira" width="1200" height="900" loading="lazy"></figure>
@@ -234,7 +451,7 @@
         </label>
         <button class="btn btn-sun" type="submit">
           <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2Z"/></svg>
-          Pedir orçamento
+          Enviar mensagem
         </button>
       </form>
     </div>
